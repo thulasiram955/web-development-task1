@@ -1,83 +1,159 @@
-#HTML
+# Html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact Form</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Intermediate HTML, CSS, and JS Project</title>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
+  <header>
+    <h1>My Responsive Page</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
 
-  <div class="contact-container">
-    <h2>Contact Us</h2>
-    <form class="contact-form">
-      <label for="name">Name</label>
-      <input type="text" id="name" name="name" placeholder="Your name" required>
+  <main class="grid-container">
+    <!-- Contact Form -->
+    <section class="form-section">
+      <h2>Contact Us</h2>
+      <form id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <button type="submit">Submit</button>
+      </form>
+      <p id="formMessage"></p>
+    </section>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="Your email" required>
+    <!-- Dynamic To-Do List -->
+    <section class="todo-section">
+      <h2>To-Do List</h2>
+      <input type="text" id="todoInput" placeholder="Add a new task..." />
+      <button onclick="addTodo()">Add</button>
+      <ul id="todoList"></ul>
+    </section>
+  </main>
 
-      <label for="message">Message</label>
-      <textarea id="message" name="message" placeholder="Write something..." rows="5" required></textarea>
-
-      <button type="submit">Send Message</button>
-    </form>
-  </div>
+  <script src="script.js"></script>
 </body>
 </html>
-#CSS
-body {
+  #css
+  body {
+  margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #f5f7fa;
+  background: #f3f3f3;
+  color: #333;
+}
+
+header {
+  background: teal;
+  color: white;
+  padding: 1em;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  height: 100vh;
+  flex-wrap: wrap;
 }
 
-.contact-container {
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
-  width: 100%;
-  max-width: 400px;
+nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
 }
 
-.contact-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+  padding: 2em;
 }
 
-.contact-form label {
-  display: block;
-  margin: 10px 0 5px;
-  font-weight: bold;
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
+section {
+  background: white;
+  padding: 1em;
   border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+input, button {
+  padding: 0.5em;
+  margin-top: 0.5em;
+  width: 100%;
   box-sizing: border-box;
 }
 
-.contact-form button {
-  width: 100%;
-  padding: 12px;
-  background-color: #0077ff;
-  color: #fff;
+button {
+  background: teal;
+  color: white;
   border: none;
-  border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
 }
 
-.contact-form button:hover {
-  background-color: #005fce;
+button:hover {
+  background: #006666;
 }
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background: #eee;
+  margin-top: 0.5em;
+  padding: 0.5em;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+#java script
+ontact Form Validation
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name");
+  const email = document.getElementById("email");
+  const message = document.getElementById("formMessage");
+
+  if (!name.value || !email.value) {
+    message.textContent = "Please fill out all fields.";
+    message.style.color = "red";
+    return;
+  }
+
+  const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+  if (!email.value.match(emailPattern)) {
+    message.textContent = "Please enter a valid email.";
+    message.style.color = "red";
+    return;
+  }
+
+  message.textContent = "Form submitted successfully!";
+  message.style.color = "green";
+  this.reset();
+});
+
+// Dynamic To-Do List
+function addTodo() {
+  const todoInput = document.getElementById("todoInput");
+  const todoList = document.getElementById("todoList");
+
+  if (todoInput.value.trim() === "") return;
+
+  const li = document.createElement("li");
+  li.textContent = todoInput.value;
+
+  li.addEventListener("click", () => li.remove()); // Remove on click
+
+  todoList.appendChild(li);
+  todoInput.value = "";
+}
+  
